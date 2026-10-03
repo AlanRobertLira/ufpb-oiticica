@@ -935,6 +935,32 @@ abstract class DatePicker_Meta_Box {
 	}
 
 	public static function save( int $post_id ) {
+		if ( get_post_type( $post_id ) !== 'evento' ) {
+			return;
+		}
+
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+			return;
+		}
+
+		if ( wp_is_post_revision( $post_id ) || wp_is_post_autosave( $post_id ) ) {
+			return;
+		}
+
+		if (
+			! isset( $_POST['oiticica_evento_meta_nonce'] ) ||
+			! wp_verify_nonce(
+				sanitize_text_field( wp_unslash( $_POST['oiticica_evento_meta_nonce'] ) ),
+				'oiticica_evento_meta_action'
+			)
+		) {
+			return;
+		}
+
+		if ( ! current_user_can( 'edit_post', $post_id ) ) {
+			return;
+		}
+
 		if ( array_key_exists( 'data_inicio', $_POST ) ) {
             $data_inicio_formatted = strtotime($_POST['data_inicio'] . ' 00:00-03:00');
 			update_post_meta(
@@ -1039,6 +1065,8 @@ abstract class DatePicker_Meta_Box {
 	}
 
 	public static function html( $post ) {
+		wp_nonce_field( 'oiticica_evento_meta_action', 'oiticica_evento_meta_nonce' );
+
         $data_inicio        = get_post_meta( $post->ID, '__data_inicio_original', true );       
         $data_fim           = get_post_meta( $post->ID, '__data_fim_original', true ); 
         $local              = get_post_meta( $post->ID, '__local', true );  
@@ -1142,6 +1170,32 @@ abstract class DatePicker_Meta_Box_Agenda {
 	}
 
 	public static function save( int $post_id ) {
+		if ( get_post_type( $post_id ) !== 'agenda' ) {
+			return;
+		}
+
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+			return;
+		}
+
+		if ( wp_is_post_revision( $post_id ) || wp_is_post_autosave( $post_id ) ) {
+			return;
+		}
+
+		if (
+			! isset( $_POST['oiticica_agenda_meta_nonce'] ) ||
+			! wp_verify_nonce(
+				sanitize_text_field( wp_unslash( $_POST['oiticica_agenda_meta_nonce'] ) ),
+				'oiticica_agenda_meta_action'
+			)
+		) {
+			return;
+		}
+
+		if ( ! current_user_can( 'edit_post', $post_id ) ) {
+			return;
+		}
+
 		if ( array_key_exists( 'data_inicio', $_POST ) ) {
             $data_inicio_formatted = strtotime($_POST['data_inicio'] . ' 00:00-03:00');
 			update_post_meta(
@@ -1197,6 +1251,8 @@ abstract class DatePicker_Meta_Box_Agenda {
 	}
 
 	public static function html( $post ) {
+		wp_nonce_field( 'oiticica_agenda_meta_action', 'oiticica_agenda_meta_nonce' );
+
         $data_inicio        = get_post_meta( $post->ID, '__data_inicio_original', true );       
         $data_fim           = get_post_meta( $post->ID, '__data_fim_original', true ); 
         $link               = get_post_meta( $post->ID, '__link', true );           
@@ -1268,6 +1324,7 @@ function c3m_video_meta() {
 }
 
 function c3m_mbe_function( $post ) {
+    wp_nonce_field( 'oiticica_edital_meta_action', 'oiticica_edital_meta_nonce' );
 
     //retrieve the meta data values if they exist
     $c3m_mbe_featured = get_post_meta( $post->ID, '_c3m_mbe_featured', true );
@@ -1285,6 +1342,32 @@ function c3m_mbe_function( $post ) {
 //hook to save the meta box data
 add_action( 'save_post', 'c3m_mbe_save_meta' );
 function c3m_mbe_save_meta( $post_ID ) {
+    if ( get_post_type( $post_ID ) !== 'edital' ) {
+        return;
+    }
+
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+        return;
+    }
+
+    if ( wp_is_post_revision( $post_ID ) || wp_is_post_autosave( $post_ID ) ) {
+        return;
+    }
+
+    if (
+        ! isset( $_POST['oiticica_edital_meta_nonce'] ) ||
+        ! wp_verify_nonce(
+            sanitize_text_field( wp_unslash( $_POST['oiticica_edital_meta_nonce'] ) ),
+            'oiticica_edital_meta_action'
+        )
+    ) {
+        return;
+    }
+
+    if ( ! current_user_can( 'edit_post', $post_ID ) ) {
+        return;
+    }
+
     global $post;
     if( $post->post_type == "edital" ) {
         if ( isset( $_POST ) ) {
