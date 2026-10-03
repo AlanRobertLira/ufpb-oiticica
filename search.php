@@ -30,7 +30,7 @@
             
             <form class="busca-resultados" role="search" method="get" id="searchform" action="<?php echo home_url( '/' ); ?>">                
                 <input type="text" value="<?php echo get_search_query(); ?>" name="s" id="s" placeholder="O que você busca?" />
-                <input type="hidden" name="post_type" value="<?php echo (isset($_GET['post_type']) ? $_GET['post_type'] : 'any'); ?>" />
+                <input type="hidden" name="post_type" value="<?php echo esc_attr( isset( $_GET['post_type'] ) ? $_GET['post_type'] : 'any' ); ?>" />
                 <button type="submit" class="fa-solid fa-magnifying-glass" > </button>                
             </form>
 
