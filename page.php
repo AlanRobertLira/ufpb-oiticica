@@ -1,5 +1,20 @@
 <?php get_header(); ?>
-<div class="corpo width-wrapper large-spacer" id="conteudo_pagina">
+<?php
+$ufpb_page_classes = array(
+    'corpo',
+    'width-wrapper',
+    'large-spacer',
+);
+
+if ( ufpb_oiticica_has_docentes_shortcode() ) {
+    $ufpb_page_classes[] = 'ufpb-shortcode-docentes-page';
+}
+
+if ( ufpb_oiticica_has_responsive_shortcode() ) {
+    $ufpb_page_classes[] = 'ufpb-shortcode-page';
+}
+?>
+<div class="<?php echo esc_attr( implode( ' ', $ufpb_page_classes ) ); ?>" id="conteudo_pagina">
     <div class="corpo-grid">
         <div class="sidebar"> 
             <ul class="side-menu">

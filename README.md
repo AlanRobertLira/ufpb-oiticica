@@ -73,6 +73,10 @@ A versão preservada possui, entre outros recursos:
 
 A documentação técnica e histórica será mantida no diretório `docs/`, abrangendo origem, migração, arquitetura, instalação, funcionalidades, desenvolvimento, licenciamento e identidade visual.
 
+Integração com componentes institucionais:
+
+- [`docs/INTEGRACAO-SHORTCODES-UFPB.md`](docs/INTEGRACAO-SHORTCODES-UFPB.md) - integração responsiva entre o layout do Oiticica e os shortcodes institucionais homologados, incluindo o tratamento específico do Corpo Docente.
+
 ## Licenciamento
 
 O cabeçalho original do tema declara **GNU General Public License v3 or later**.

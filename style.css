@@ -5101,3 +5101,51 @@ body.contraste {
     font-size: 28px;
   }
 }
+/* ==========================================================================
+   UFPB - Layout responsivo para paginas com shortcodes homologados
+   --------------------------------------------------------------------------
+   Aplicado somente quando page.php identifica um shortcode registrado em
+   ufpb_oiticica_responsive_shortcodes().
+   ========================================================================== */
+
+#conteudo_pagina.ufpb-shortcode-page .content-grid {
+  max-width: none;
+  min-width: 0;
+}
+
+#conteudo_pagina.ufpb-shortcode-page .the-content-container {
+  min-width: 0;
+}
+
+@media only screen and (min-width: 801px) {
+  #conteudo_pagina.ufpb-shortcode-page .corpo-grid {
+    grid-template-columns: 1fr minmax(0, 3fr);
+    grid-template-areas: "sb ct";
+    gap: 48px;
+  }
+
+  /*
+   * Quando a pagina com shortcode homologado nao possui navegacao lateral
+   * aplicavel, nao reserva uma coluna vazia para a sidebar.
+   */
+  #conteudo_pagina.ufpb-shortcode-page .corpo-grid:not(:has(.sidebar .side-menu .current-menu-parent)):not(:has(.sidebar .side-menu-categorias)) {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "ct";
+  }
+
+  #conteudo_pagina.ufpb-shortcode-page .corpo-grid:not(:has(.sidebar .side-menu .current-menu-parent)):not(:has(.sidebar .side-menu-categorias)) .sidebar {
+    display: none;
+  }
+}
+
+/*
+ * Docentes SIGAA:
+ * reduz a coluna da navegacao lateral e amplia a area dos cards.
+ * Nao altera outras paginas ou outros shortcodes homologados.
+ */
+@media only screen and (min-width: 801px) {
+  #conteudo_pagina.ufpb-shortcode-docentes-page .corpo-grid {
+    grid-template-columns: minmax(150px, 1fr) minmax(0, 5fr);
+    gap: 32px;
+  }
+}

@@ -23,6 +23,96 @@ include get_theme_file_path('/widgets/WidgetAgenda.php');
 include get_theme_file_path('/widgets/WidgetNumerosCustom.php');
 include get_theme_file_path('/widgets/WidgetNoticiasBanner.php');
 
+
+/**
+ * Shortcodes homologados para o layout responsivo especial do tema.
+ *
+ * Plugins podem ampliar esta lista por meio do filtro
+ * 'ufpb_oiticica_responsive_shortcodes'.
+ *
+ * @return string[]
+ */
+function ufpb_oiticica_responsive_shortcodes() {
+    $shortcodes = array(
+        'ufpb_sigaa_docentes',
+        'ufpb_sigaa_componentes',
+        'ufpb_sigaa_processos_seletivos',
+        'ufpb_sigaa_processos_seletivos_home',
+    );
+
+    $shortcodes = apply_filters(
+        'ufpb_oiticica_responsive_shortcodes',
+        $shortcodes
+    );
+
+    if ( ! is_array( $shortcodes ) ) {
+        return array();
+    }
+
+    $shortcodes = array_map(
+        function ( $shortcode ) {
+            return is_string( $shortcode ) ? trim( $shortcode ) : '';
+        },
+        $shortcodes
+    );
+
+    $shortcodes = array_filter(
+        $shortcodes,
+        function ( $shortcode ) {
+            return '' !== $shortcode;
+        }
+    );
+
+    return array_values( array_unique( $shortcodes ) );
+}
+
+/**
+ * Verifica se uma pagina contem o shortcode de docentes do SIGAA.
+ *
+ * @param WP_Post|int|null $post Post ou ID a verificar.
+ * @return bool
+ */
+function ufpb_oiticica_has_docentes_shortcode( $post = null ) {
+    $post = get_post( $post );
+
+    if ( ! $post instanceof WP_Post || 'page' !== $post->post_type ) {
+        return false;
+    }
+
+    if ( ! is_string( $post->post_content ) || '' === $post->post_content ) {
+        return false;
+    }
+
+    return has_shortcode( $post->post_content, 'ufpb_sigaa_docentes' );
+}
+
+
+/**
+ * Verifica se uma pagina contem shortcode homologado para o layout responsivo.
+ *
+ * @param WP_Post|int|null $post Post ou ID a verificar.
+ * @return bool
+ */
+function ufpb_oiticica_has_responsive_shortcode( $post = null ) {
+    $post = get_post( $post );
+
+    if ( ! $post instanceof WP_Post || 'page' !== $post->post_type ) {
+        return false;
+    }
+
+    if ( ! is_string( $post->post_content ) || '' === $post->post_content ) {
+        return false;
+    }
+
+    foreach ( ufpb_oiticica_responsive_shortcodes() as $shortcode ) {
+        if ( has_shortcode( $post->post_content, $shortcode ) ) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 function example_theme_support() {
     remove_theme_support( 'widgets-block-editor' );
 }
