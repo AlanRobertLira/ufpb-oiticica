@@ -5104,11 +5104,24 @@ body.contraste {
 /* ==========================================================================
    UFPB - Layout responsivo para paginas com shortcodes homologados
    --------------------------------------------------------------------------
-   Aplicado somente quando page.php identifica um shortcode registrado em
-   ufpb_oiticica_responsive_shortcodes().
+   Aplicado exclusivamente a paginas identificadas pelo tema.
+   Preserva o comportamento das demais paginas institucionais.
    ========================================================================== */
 
+#conteudo_pagina.ufpb-shortcode-page .corpo-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "ct";
+  gap: 0;
+}
+
+#conteudo_pagina.ufpb-shortcode-page .sidebar {
+  display: none;
+}
+
 #conteudo_pagina.ufpb-shortcode-page .content-grid {
+  grid-area: ct;
+  width: 100%;
   max-width: none;
   min-width: 0;
 }
@@ -5117,35 +5130,13 @@ body.contraste {
   min-width: 0;
 }
 
-@media only screen and (min-width: 801px) {
-  #conteudo_pagina.ufpb-shortcode-page .corpo-grid {
-    grid-template-columns: 1fr minmax(0, 3fr);
-    grid-template-areas: "sb ct";
-    gap: 48px;
-  }
-
-  /*
-   * Quando a pagina com shortcode homologado nao possui navegacao lateral
-   * aplicavel, nao reserva uma coluna vazia para a sidebar.
-   */
-  #conteudo_pagina.ufpb-shortcode-page .corpo-grid:not(:has(.sidebar .side-menu .current-menu-parent)):not(:has(.sidebar .side-menu-categorias)) {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-areas: "ct";
-  }
-
-  #conteudo_pagina.ufpb-shortcode-page .corpo-grid:not(:has(.sidebar .side-menu .current-menu-parent)):not(:has(.sidebar .side-menu-categorias)) .sidebar {
-    display: none;
-  }
+#conteudo_pagina.ufpb-shortcode-page .content-grid > h1 {
+  display: none;
 }
 
-/*
- * Docentes SIGAA:
- * reduz a coluna da navegacao lateral e amplia a area dos cards.
- * Nao altera outras paginas ou outros shortcodes homologados.
- */
-@media only screen and (min-width: 801px) {
-  #conteudo_pagina.ufpb-shortcode-docentes-page .corpo-grid {
-    grid-template-columns: minmax(150px, 1fr) minmax(0, 5fr);
-    gap: 32px;
+@media only screen and (max-width: 800px) {
+  #conteudo_pagina.ufpb-shortcode-page .corpo-grid {
+    display: flex;
+    flex-direction: column;
   }
 }
