@@ -1,5 +1,29 @@
 # Changelog
 
+## [Unreleased] — Preparação da versão 2.10.0
+
+### Adicionado
+- Layout responsivo para páginas elegíveis com shortcodes UFPB Base SIGAA.
+- Documentação técnica e institucional do tema.
+
+### Alterado
+- Identificação da STI/UFPB como responsável pela manutenção.
+- Referência ao repositório institucional no GitLab.
+- Apresentação de páginas elegíveis, preservando o layout das demais páginas.
+
+### Segurança
+- Reforço das validações de salvamento de metaboxes.
+- Escapamento de saída na pesquisa.
+
+### Compatibilidade
+- Preservação dos templates institucionais existentes.
+- Integração com o plugin UFPB Base SIGAA.
+
+**Estado:** versão em preparação, ainda não publicada.
+
+---
+
+
 Este documento registra a evolução do repositório Oiticica a partir da etapa de preservação, documentação e continuidade.
 
 O histórico anterior permanece integralmente disponível no Git e constitui a fonte primária para a evolução histórica do tema.
