@@ -6,10 +6,6 @@ $ufpb_page_classes = array(
     'large-spacer',
 );
 
-if ( ufpb_oiticica_has_docentes_shortcode() ) {
-    $ufpb_page_classes[] = 'ufpb-shortcode-docentes-page';
-}
-
 if ( ufpb_oiticica_has_responsive_shortcode() ) {
     $ufpb_page_classes[] = 'ufpb-shortcode-page';
 }

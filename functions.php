@@ -25,24 +25,17 @@ include get_theme_file_path('/widgets/WidgetNoticiasBanner.php');
 
 
 /**
- * Shortcodes homologados para o layout responsivo especial do tema.
+ * Retorna os shortcodes elegiveis ao layout responsivo.
  *
- * Plugins podem ampliar esta lista por meio do filtro
- * 'ufpb_oiticica_responsive_shortcodes'.
+ * A lista e fornecida pelos plugins por meio do filtro
+ * ufpb_oiticica_responsive_shortcodes.
  *
  * @return string[]
  */
 function ufpb_oiticica_responsive_shortcodes() {
-    $shortcodes = array(
-        'ufpb_sigaa_docentes',
-        'ufpb_sigaa_componentes',
-        'ufpb_sigaa_processos_seletivos',
-        'ufpb_sigaa_processos_seletivos_home',
-    );
-
     $shortcodes = apply_filters(
         'ufpb_oiticica_responsive_shortcodes',
-        $shortcodes
+        array()
     );
 
     if ( ! is_array( $shortcodes ) ) {
@@ -65,27 +58,6 @@ function ufpb_oiticica_responsive_shortcodes() {
 
     return array_values( array_unique( $shortcodes ) );
 }
-
-/**
- * Verifica se uma pagina contem o shortcode de docentes do SIGAA.
- *
- * @param WP_Post|int|null $post Post ou ID a verificar.
- * @return bool
- */
-function ufpb_oiticica_has_docentes_shortcode( $post = null ) {
-    $post = get_post( $post );
-
-    if ( ! $post instanceof WP_Post || 'page' !== $post->post_type ) {
-        return false;
-    }
-
-    if ( ! is_string( $post->post_content ) || '' === $post->post_content ) {
-        return false;
-    }
-
-    return has_shortcode( $post->post_content, 'ufpb_sigaa_docentes' );
-}
-
 
 /**
  * Verifica se uma pagina contem shortcode homologado para o layout responsivo.

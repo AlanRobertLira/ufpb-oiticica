@@ -11,73 +11,71 @@ A integração mantém separadas as responsabilidades entre tema e plugin:
 - o tema não redefine a estrutura interna dos cards dos plugins;
 - os plugins não alteram o grid global, menus ou templates do tema.
 
-## Shortcodes homologados
+## Identificação unificada dos shortcodes
 
-O tratamento responsivo especial do Oiticica contempla:
+O plugin UFPB Base SIGAA informa ao tema os shortcodes
+elegíveis por meio do filtro
+`ufpb_oiticica_responsive_shortcodes`.
 
-```text
-[ufpb_sigaa_docentes]
-[ufpb_sigaa_componentes]
-[ufpb_sigaa_processos_seletivos]
-[ufpb_sigaa_processos_seletivos_home]
-```
+Shortcodes contemplados na versão 0.9.0:
 
-A identificação é realizada a partir do conteúdo da página WordPress.
+- `ufpb_sigaa_docentes`
+- `ufpb_sigaa_componentes`
+- `ufpb_sigaa_processos_seletivos`
+- `ufpb_sigaa_processos_seletivos_home`
+- `ufpb_sigaa_cursos`
+- `ufpb_sigaa_curso`
 
-Somente páginas que contenham um dos shortcodes homologados recebem a classe de integração responsiva do tema.
+O tema utiliza duas funções:
 
-## Layout responsivo geral
+- `ufpb_oiticica_responsive_shortcodes()`: recebe e normaliza
+  a lista fornecida pelo plugin.
+- `ufpb_oiticica_has_responsive_shortcode()`: identifica
+  páginas contendo shortcodes elegíveis.
 
-Em telas desktop, páginas contendo shortcodes homologados podem utilizar uma área de conteúdo ampliada em relação ao grid histórico do Oiticica.
+Não existe tratamento de identificação exclusivo para docentes.
 
-Quando a navegação lateral não é aplicável à página, a sidebar é ocultada e a área de conteúdo utiliza a largura disponível.
+## Layout responsivo unificado
 
-Esse comportamento é restrito às páginas identificadas como páginas de shortcode e não altera globalmente o layout das demais páginas do tema.
+Todas as páginas elegíveis recebem a classe
+`ufpb-shortcode-page`.
 
-## Corpo Docente
+O tema controla o layout externo da página, enquanto
+o plugin controla a apresentação interna dos componentes.
 
-O shortcode:
+## Preservação das páginas legadas
 
-```text
-[ufpb_sigaa_docentes departamento="<ID>"]
-```
+Páginas sem shortcodes elegíveis não recebem classes
+adicionais nem alterações específicas de layout.
 
-recebe tratamento adicional por meio da identificação específica da página.
+Devem permanecer preservados:
 
-Quando a página de Corpo Docente possui navegação lateral, o Oiticica reduz a largura relativa da sidebar e amplia a área disponível ao componente.
+- estrutura HTML e classes originais;
+- templates e funcionalidades;
+- menus, sidebar, cabeçalho e rodapé;
+- títulos e conteúdo;
+- comportamento responsivo legado.
 
-No desktop, o grid específico utiliza:
+A integração não deve modificar globalmente o tema.
 
-```css
-grid-template-columns: minmax(150px, 1fr) minmax(0, 5fr);
-gap: 32px;
-```
+## Extensibilidade
 
-Essa regra:
+Novos shortcodes podem ser informados pelo plugin
+através do filtro `ufpb_oiticica_responsive_shortcodes`.
 
-- aplica-se somente às páginas contendo `[ufpb_sigaa_docentes]`;
-- não remove a sidebar quando ela é necessária;
-- não altera páginas comuns do Oiticica;
-- não altera páginas que utilizam outros shortcodes;
-- não controla a composição interna dos cards de docentes.
+Não é necessário manter uma lista fixa no tema.
 
-A apresentação dos cards, incluindo quantidade de colunas, dimensões, tipografia e comportamento conforme a largura disponível, permanece sob responsabilidade do plugin UFPB Base SIGAA.
+## Critérios de homologação
 
-## Classes utilizadas
+Devem ser verificados:
 
-As páginas contendo shortcodes homologados recebem:
+- reconhecimento dos seis shortcodes existentes;
+- reconhecimento de novos shortcodes fornecidos pelo filtro;
+- preservação das páginas sem shortcodes elegíveis;
+- funcionamento nos blogs do WordPress Multisite;
+- ausência de regressões funcionais e visuais.
 
-```text
-ufpb-shortcode-page
-```
-
-As páginas contendo especificamente o shortcode de Corpo Docente também recebem:
-
-```text
-ufpb-shortcode-docentes-page
-```
-
-A classe específica permite ajustes de integração sem produzir efeitos colaterais sobre os demais componentes institucionais.
+Os testes isolados não substituem a homologação no WordPress.
 
 ## Responsabilidades arquiteturais
 
@@ -103,18 +101,45 @@ Dessa forma, a apresentação não depende de uma resolução fixa de monitor. O
 
 ## Homologação
 
-O comportamento foi validado no ambiente `wpdev` em outubro de 2026.
+### Histórico anterior — outubro de 2026
 
-Foram verificados:
+O comportamento anterior foi validado no ambiente `wpdev`.
+
+Os registros históricos incluem:
 
 - página de Corpo Docente com sidebar;
-- apresentação do Corpo Docente em uma coluna;
-- apresentação do Corpo Docente em duas colunas;
-- preservação horizontal dos cards no modo de duas colunas;
+- apresentação em uma e duas colunas;
+- preservação horizontal dos cards em duas colunas;
 - ampliação da área útil do componente;
-- redução da sidebar somente nas páginas de Corpo Docente;
-- preservação do comportamento das demais páginas do tema.
+- ajustes específicos de sidebar para Corpo Docente;
+- verificações de preservação das demais páginas.
 
-No modo de uma coluna, a largura e a centralização dos cards são controladas pelo plugin UFPB Base SIGAA e não pelo tema.
+Esses registros descrevem a implementação anterior e não
+constituem homologação da identificação unificada.
 
-As alterações foram homologadas no `wpdev` antes da consolidação no histórico Git.
+A largura e a centralização dos cards de Corpo Docente
+continuam sob responsabilidade do plugin UFPB Base SIGAA.
+
+### Identificação unificada — outubro de 2026
+
+A implementação atual utiliza exclusivamente:
+
+- `ufpb_oiticica_responsive_shortcodes()`;
+- `ufpb_oiticica_has_responsive_shortcode()`;
+- classe CSS `ufpb-shortcode-page`.
+
+O plugin fornece a lista de shortcodes elegíveis por filtro.
+
+Foram aprovados oito testes funcionais isolados, incluindo
+os seis shortcodes existentes, uma página comum e a ausência
+de shortcodes fornecidos pelo plugin.
+
+Também foram aprovadas as verificações de sintaxe PHP e
+`git diff --check`.
+
+**Situação: homologação no WordPress Multisite pendente.**
+
+Antes da aprovação, deverão ser verificados os componentes
+SIGAA e as páginas legadas dos Blogs 1 e 2, incluindo
+estrutura HTML, layout, menus, sidebar, títulos,
+responsividade e ausência de regressões funcionais.
