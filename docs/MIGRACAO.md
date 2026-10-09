@@ -63,6 +63,29 @@ A cadeia planejada de preservação e institucionalização é:
 
 O caminho final no GitLab deverá ser confirmado antes da transferência institucional.
 
+## Situação institucional verificada em 09/10/2026
+
+O repositório de trabalho possui os seguintes remotos configurados:
+
+- GitHub: `https://github.com/AlanRobertLira/ufpb-oiticica.git`
+- GitLab DEV UFPB: `https://gitlabdev.sti.ufpb.br/gsi/sites/temas/ufpb-oiticica.git`
+
+Foram identificadas referências locais de acompanhamento das
+branches nos dois remotos.
+
+A consulta de tags remotas realizada em 09/10/2026 não retornou
+tags publicadas.
+
+A existência dos remotos e de suas referências não comprova,
+isoladamente, que todas as branches estejam sincronizadas.
+
+A sincronização deverá ser verificada novamente antes de qualquer
+publicação, criação de release ou alteração institucional.
+
+Esta seção registra a continuidade posterior à migração histórica.
+As seções anteriores permanecem como documentação do processo
+original de preservação.
+
 ## Responsabilidades
 
 ### Desenvolvimento histórico

@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased] — Preparação da versão 2.10.0
+## [2.10.0] — Versão identificada no WPDEV
 
 ### Adicionado
 - Layout responsivo para páginas elegíveis com shortcodes UFPB Base SIGAA.
@@ -19,7 +19,7 @@
 - Preservação dos templates institucionais existentes.
 - Integração com o plugin UFPB Base SIGAA.
 
-**Estado:** versão em preparação, ainda não publicada.
+**Estado em 09/10/2026:** versão 2.10.0 identificada e homologada no WPDEV. A publicação institucional em produção não foi confirmada. Não há tag de release identificada nos remotos GitHub e GitLab consultados.
 
 ---
 

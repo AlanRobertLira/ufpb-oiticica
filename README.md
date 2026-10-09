@@ -16,6 +16,30 @@ A versão existente no momento da migração é a **2.9.3**.
 
 **2.9.3 - Ajuste de <details> e campo de token de API da editora**
 
+## Continuidade institucional
+
+A versão histórica original preservada é a **2.9.3**.
+
+A etapa posterior de manutenção institucional evoluiu o tema
+até a versão **2.10.0**, identificada no ambiente WPDEV em
+09/10/2026.
+
+A instalação no WPDEV não comprova publicação em produção.
+
+O desenvolvimento atual contempla melhorias de segurança,
+responsividade e integração com o plugin UFPB Base SIGAA,
+preservando o funcionamento das páginas institucionais existentes.
+
+A correção REG-001, relacionada à ausência de eventos,
+permanece em desenvolvimento e ainda não foi homologada.
+
+O tema possui versionamento independente do plugin.
+
+Consulte a
+[Política de Versionamento](docs/POLITICA-DE-VERSIONAMENTO.md)
+para conhecer os critérios de releases, homologação,
+rastreabilidade e rollback.
+
 ## Autoria original
 
 O desenvolvimento histórico preservado neste repositório é atribuído a **Gabriel Fleig Alves**.
