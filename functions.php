@@ -1842,7 +1842,8 @@ function fc_opengraph() {
         if ( has_post_thumbnail($post_id )) {
             $image = get_the_post_thumbnail_url($post_id);
         } else {
-            $image = wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'full' )[0];
+            $logo = wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'full' );
+            $image = is_array( $logo ) ? ( $logo[0] ?? false ) : false;
         }
         
         
