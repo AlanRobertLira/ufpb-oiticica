@@ -103,7 +103,13 @@
                         echo '</div>
                     </div>';
                 } else {
-                    wp_safe_redirect( get_home_url() . '/eventos/passados');
+                    echo '<p class="eventos-sem-resultados" role="status">';
+                    echo esc_html(
+                        isset( $wp_query->query_vars['is_past'] )
+                            ? 'Nenhum evento passado encontrado.'
+                            : 'Nenhum evento atual ou futuro encontrado.'
+                    );
+                    echo '</p>';
                     //echo '<p>Desculpe, nenhum post corresponde aos seus critérios.</p>';
                 }
                 echo '
